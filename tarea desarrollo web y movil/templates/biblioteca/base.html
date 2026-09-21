@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Biblioteca Horizonte{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'biblioteca/css/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="{% url 'home' %}">Biblioteca Horizonte</a>
+        {% if user.is_authenticated %}
+        <nav aria-label="Navegacion principal">
+            <a href="{% url 'home' %}">Inicio</a>
+            <a href="{% url 'libro_list' %}">Libros</a>
+            <span class="user-label">Hola, {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesion</button>
+            </form>
+        </nav>
+        {% endif %}
+    </header>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <script src="{% static 'biblioteca/js/validation.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

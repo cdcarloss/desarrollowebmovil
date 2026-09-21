@@ -1,0 +1,37 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Catalogo | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><p class="eyebrow">Catalogo</p><h1>Libros disponibles</h1></div>
+    <a class="button button-primary" href="{% url 'libro_create' %}">Agregar libro</a>
+</div>
+<form class="filter-bar" method="get">
+    <label for="categoria">Filtrar por categoria</label>
+    <select id="categoria" name="categoria">
+        <option value="">Todas las categorias</option>
+        {% for categoria in categorias %}
+        <option value="{{ categoria.id }}" {% if categoria.id|stringformat:'s' == categoria_seleccionada %}selected{% endif %}>{{ categoria.nombre }}</option>
+        {% endfor %}
+    </select>
+    <button class="button button-secondary" type="submit">Filtrar</button>
+</form>
+<div class="loading-state" hidden>Cargando catalogo...</div>
+{% if libros %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Titulo</th><th>Autor</th><th>ISBN</th><th>Ejemplares</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for libro in libros %}
+    <tr>
+        <td>{{ libro.titulo }}</td><td>{{ libro.autor }}</td><td>{{ libro.isbn }}</td>
+        <td>{{ libro.ejemplares_disponibles }}</td>
+        <td class="actions"><a href="{% url 'libro_update' libro.pk %}">Editar</a><a href="{% url 'libro_delete' libro.pk %}">Eliminar</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>No hay libros para mostrar</h2><p>Prueba otro filtro o agrega el primer libro del catalogo.</p></section>
+{% endif %}
+{% endblock %}

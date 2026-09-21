@@ -1,0 +1,14 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Inicio | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Panel de biblioteca</p>
+    <h1>Una coleccion que siempre encuentra su lector.</h1>
+    <p>Consulta el catalogo, organiza tus libros y prepara la gestion de prestamos.</p>
+    <a class="button button-primary" href="{% url 'libro_list' %}">Explorar catalogo</a>
+</section>
+<section class="stats" aria-label="Resumen">
+    <article class="stat-card"><strong>{{ total_libros }}</strong><span>libros registrados</span></article>
+    <article class="stat-card"><strong>{{ total_categorias }}</strong><span>categorias activas</span></article>
+</section>
+{% endblock %}

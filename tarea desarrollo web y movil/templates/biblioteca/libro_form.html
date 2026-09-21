@@ -1,0 +1,18 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}{{ accion }} libro | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">Catalogo</p><h1>{{ accion }} libro</h1>
+    <form method="post" data-validate novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="field-group">
+            {{ field.label_tag }}{{ field }}
+            <span class="field-error" data-error-for="{{ field.id_for_label }}"></span>
+            {{ field.errors }}
+        </div>
+        {% endfor %}
+        <div class="form-actions"><button class="button button-primary" type="submit">Guardar</button><a class="button button-secondary" href="{% url 'libro_list' %}">Cancelar</a></div>
+    </form>
+</section>
+{% endblock %}
