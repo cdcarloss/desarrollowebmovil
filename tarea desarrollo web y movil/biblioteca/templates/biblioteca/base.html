@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="{% static 'biblioteca/css/styles.css' %}">
 </head>
 <body>
-    <canvas id="fondo-vectores" aria-hidden="true"></canvas>
+    <div class="fondo-video" aria-hidden="true">
+        <video autoplay muted loop playsinline>
+            <source src="{% static 'biblioteca/video/bookshop-fondo.mp4' %}" type="video/mp4">
+        </video>
+    </div>
+    <div class="fondo-cortina" aria-hidden="true"></div>
     <header class="site-header">
         <a class="brand" href="{% url 'home' %}">Biblioteca Horizonte</a>
         {% if user.is_authenticated %}
@@ -51,6 +56,5 @@
     </main>
     <footer class="site-footer">Biblioteca Horizonte · Proyecto académico de Desarrollo Web y Móvil</footer>
     <script src="{% static 'biblioteca/js/validation.js' %}"></script>
-    <script src="{% static 'biblioteca/js/fondo.js' %}"></script>
 </body>
 </html>

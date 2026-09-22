@@ -6,3 +6,4 @@ __pycache__/
 staticfiles/
 mediafiles/
 db.sqlite3
+MIS-CREDENCIALES.md
