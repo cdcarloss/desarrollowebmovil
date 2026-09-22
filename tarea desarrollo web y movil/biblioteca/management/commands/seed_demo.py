@@ -47,7 +47,7 @@ class Command(BaseCommand):
     def crear_usuarios(self):
         User = get_user_model()
         admin, _ = User.objects.get_or_create(username="admin")
-        admin.email = "admin@bibliotecahorizonte.cl"
+        admin.email = "admin@bibliotecalarecamara.cl"
         admin.is_staff = True
         admin.is_superuser = True
         admin.set_password("Admin12345!")
@@ -56,7 +56,7 @@ class Command(BaseCommand):
         admin.perfil.save()
 
         lector, _ = User.objects.get_or_create(username="lector")
-        lector.email = "lector@bibliotecahorizonte.cl"
+        lector.email = "lector@bibliotecalarecamara.cl"
         lector.set_password("Lector12345!")
         lector.save()
         lector.perfil.descripcion = "Cuenta de prueba genérica (sin socio vinculado)."
@@ -186,9 +186,9 @@ class Command(BaseCommand):
 
     def crear_empleados(self):
         datos = [
-            ("Andrea Silva", "andrea.silva@bibliotecahorizonte.cl", Empleado.Cargo.ADMINISTRADOR),
-            ("Felipe Muñoz", "felipe.munoz@bibliotecahorizonte.cl", Empleado.Cargo.BIBLIOTECARIO),
-            ("Javiera Pérez", "javiera.perez@bibliotecahorizonte.cl", Empleado.Cargo.ASISTENTE),
+            ("Andrea Silva", "andrea.silva@bibliotecalarecamara.cl", Empleado.Cargo.ADMINISTRADOR),
+            ("Felipe Muñoz", "felipe.munoz@bibliotecalarecamara.cl", Empleado.Cargo.BIBLIOTECARIO),
+            ("Javiera Pérez", "javiera.perez@bibliotecalarecamara.cl", Empleado.Cargo.ASISTENTE),
         ]
         return {
             correo: Empleado.objects.get_or_create(correo=correo, defaults={"nombre": nombre, "cargo": cargo})[0]
@@ -198,9 +198,9 @@ class Command(BaseCommand):
     def crear_prestamos(self, libros_fisicos, libros_ebook, juegos, socios, empleados):
         if Prestamo.objects.exists():
             return
-        felipe = empleados["felipe.munoz@bibliotecahorizonte.cl"]
-        javiera = empleados["javiera.perez@bibliotecahorizonte.cl"]
-        andrea = empleados["andrea.silva@bibliotecahorizonte.cl"]
+        felipe = empleados["felipe.munoz@bibliotecalarecamara.cl"]
+        javiera = empleados["javiera.perez@bibliotecalarecamara.cl"]
+        andrea = empleados["andrea.silva@bibliotecalarecamara.cl"]
 
         # Prestamos registrados en el mesón (con empleado)
         prestamos_mesa = [

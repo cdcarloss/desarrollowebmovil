@@ -201,13 +201,13 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
 INSERT INTO `auth_user` VALUES
-(1,'pbkdf2_sha256$1000000$KvZ2xSletAtVrd1QskL1Tu$XTJU3uPn2F49qi9IUrVgPuF1jKF6ktj5QdWwucl59xo=',NULL,1,'admin','','','admin@bibliotecahorizonte.cl',1,1,'2026-09-22 07:53:31.387935'),
-(2,'pbkdf2_sha256$1000000$MAKxIYREYjH9MqxUiWU5NR$xbsVkGCJHYtrTmiZUwhGLO1G/Du2qD22Ux7XZXmWdQI=',NULL,0,'lector','','','lector@bibliotecahorizonte.cl',0,1,'2026-09-22 07:53:31.948034'),
-(3,'pbkdf2_sha256$1000000$0AuQzymqiq2u8dgGi9VYt6$cxa0zNLHdgc0M5d3XdE+fCivsgPkt7tx0DbDwMa12fY=',NULL,0,'sofia-martinez','Sofía','','sofia.martinez@example.com',0,1,'2026-09-22 07:53:32.760810'),
-(4,'pbkdf2_sha256$1000000$d0ngRNXQloppKIWQqBS8jd$5dQl/v5rBZZ80BswaG2vTh8G+fNvz26r/AjgGnY0w4M=',NULL,0,'mateo-gonzalez','Mateo','','mateo.gonzalez@example.com',0,1,'2026-09-22 07:53:33.277775'),
-(5,'pbkdf2_sha256$1000000$nt0aUmDLxPdesQp5Fg0ugv$dybFiFOe2hrt/xHaARMxibDfLhgGoouPo9yhkIUx8r8=',NULL,0,'valentina-rojas','Valentina','','valentina.rojas@example.com',0,1,'2026-09-22 07:53:33.847154'),
-(6,'pbkdf2_sha256$1000000$JgTlM7TMu7Pp1BiktbDO5u$S2+dE8iGwrynV9d8piF9bD9lsuveO2VrZMYJMxPk/Gg=',NULL,0,'diego-fuentes','Diego','','diego.fuentes@example.com',0,1,'2026-09-22 07:53:34.384774'),
-(7,'pbkdf2_sha256$1000000$B1jAxYtvtUWCsXtOIvKeuQ$14L9VrHGHGWhv58iYQc6XbtSVCOJv15uSiSmV63KAN8=',NULL,0,'camila-torres','Camila','','camila.torres@example.com',0,1,'2026-09-22 07:53:34.907992');
+(1,'pbkdf2_sha256$1000000$8TByyOaVyk38iOvSauJsKX$OxMaU6Kq6rr+X6owDlpjOb+/MTQQyR9agdkGMT8TBmc=',NULL,1,'admin','','','admin@bibliotecalarecamara.cl',1,1,'2026-09-22 09:13:11.251912'),
+(2,'pbkdf2_sha256$1000000$NUvg4xymeKtxtP7PMT10t9$RvVArlPuph1xBWfBoW1cjY8xHDJcdYasRoOtkbxGkEs=',NULL,0,'lector','','','lector@bibliotecalarecamara.cl',0,1,'2026-09-22 09:13:11.762382'),
+(3,'pbkdf2_sha256$1000000$FEQWv3UgbfbYDd6up5zbHS$ou/wbVZX9YqM+F45BJGwFqznY3If18DF/wD4kNUKF1I=',NULL,0,'sofia-martinez','Sofía','','sofia.martinez@example.com',0,1,'2026-09-22 09:13:12.588785'),
+(4,'pbkdf2_sha256$1000000$83LWZxZfbUx1IlZLeN4PrR$z1Xp5f7VultLayKWiFHh/yNGWcAsvnMwwuNi96RBS9c=',NULL,0,'mateo-gonzalez','Mateo','','mateo.gonzalez@example.com',0,1,'2026-09-22 09:13:13.087128'),
+(5,'pbkdf2_sha256$1000000$qHA5yaGlN5Ri4Mcou7NEnZ$nxxJdnB77GmDN27pAuTvUIfUiPh4Iqfl8y527ucpmag=',NULL,0,'valentina-rojas','Valentina','','valentina.rojas@example.com',0,1,'2026-09-22 09:13:13.600161'),
+(6,'pbkdf2_sha256$1000000$e6YzGuHx9Q5xrwKapwuEAi$0exgbLx4u/9rXJl8yUYR4jWGViEsdlYL02d2TX5A/fQ=',NULL,0,'diego-fuentes','Diego','','diego.fuentes@example.com',0,1,'2026-09-22 09:13:14.113790'),
+(7,'pbkdf2_sha256$1000000$kaMsC7cxTYmaGuUwX1wnkT$+f4D5mhPbybNPgskCL8kC0C7OhRybaW1of7VDRvnOIc=',NULL,0,'camila-torres','Camila','','camila.torres@example.com',0,1,'2026-09-22 09:13:14.636428');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -338,11 +338,11 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `biblioteca_comentario` WRITE;
 /*!40000 ALTER TABLE `biblioteca_comentario` DISABLE KEYS */;
 INSERT INTO `biblioteca_comentario` VALUES
-(1,'Una relectura obligada. Cada vez encuentro algo nuevo en Macondo.','2026-09-22 07:53:35.547420',3,1),
-(2,'Al principio cuesta seguir a toda la familia Buendía, pero vale la pena.','2026-09-22 07:53:35.552023',4,1),
-(3,'Inquietante y todavía muy vigente. Lo terminé en dos días.','2026-09-22 07:53:35.558164',5,6),
-(4,'Bolaño construye personajes que se sienten reales. Muy recomendado.','2026-09-22 07:53:35.563182',6,8),
-(5,'Elizabeth Bennet es uno de mis personajes favoritos de la literatura.','2026-09-22 07:53:35.568421',7,5);
+(1,'Una relectura obligada. Cada vez encuentro algo nuevo en Macondo.','2026-09-22 09:13:15.262152',3,1),
+(2,'Al principio cuesta seguir a toda la familia Buendía, pero vale la pena.','2026-09-22 09:13:15.266971',4,1),
+(3,'Inquietante y todavía muy vigente. Lo terminé en dos días.','2026-09-22 09:13:15.271349',5,6),
+(4,'Bolaño construye personajes que se sienten reales. Muy recomendado.','2026-09-22 09:13:15.276482',6,8),
+(5,'Elizabeth Bennet es uno de mis personajes favoritos de la literatura.','2026-09-22 09:13:15.284528',7,5);
 /*!40000 ALTER TABLE `biblioteca_comentario` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -374,9 +374,9 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `biblioteca_empleado` WRITE;
 /*!40000 ALTER TABLE `biblioteca_empleado` DISABLE KEYS */;
 INSERT INTO `biblioteca_empleado` VALUES
-(1,'Andrea Silva','andrea.silva@bibliotecahorizonte.cl','ADMINISTRADOR',1),
-(2,'Felipe Muñoz','felipe.munoz@bibliotecahorizonte.cl','BIBLIOTECARIO',1),
-(3,'Javiera Pérez','javiera.perez@bibliotecahorizonte.cl','ASISTENTE',1);
+(1,'Andrea Silva','andrea.silva@bibliotecalarecamara.cl','ADMINISTRADOR',1),
+(2,'Felipe Muñoz','felipe.munoz@bibliotecalarecamara.cl','BIBLIOTECARIO',1),
+(3,'Javiera Pérez','javiera.perez@bibliotecalarecamara.cl','ASISTENTE',1);
 /*!40000 ALTER TABLE `biblioteca_empleado` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -411,11 +411,11 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `biblioteca_juegomesa` WRITE;
 /*!40000 ALTER TABLE `biblioteca_juegomesa` DISABLE KEYS */;
 INSERT INTO `biblioteca_juegomesa` VALUES
-(1,1,'portadas/juegos/catan_48RHmH4.jpg','Catan','Devir','ESTRATEGIA',3,4,10),
-(2,2,'portadas/juegos/carcassonne_FXPCV7g.jpg','Carcassonne','Devir','FAMILIAR',2,5,7),
-(3,0,'portadas/juegos/dixit_lwf8EcJ.jpg','Dixit','Libellud','PARTY',3,6,8),
-(4,2,'portadas/juegos/catan-los-colonos-junior_w2IO4zi.jpg','Catan: Los Colonos Junior','Devir','INFANTIL',2,4,6),
-(5,1,'portadas/juegos/azul_p8EAeWb.jpg','Azul','Next Move Games','ESTRATEGIA',2,4,8);
+(1,1,'portadas/juegos/catan_NG69o1V.jpg','Catan','Devir','ESTRATEGIA',3,4,10),
+(2,2,'portadas/juegos/carcassonne_JE4he70.jpg','Carcassonne','Devir','FAMILIAR',2,5,7),
+(3,0,'portadas/juegos/dixit_BwjVBwn.jpg','Dixit','Libellud','PARTY',3,6,8),
+(4,2,'portadas/juegos/catan-los-colonos-junior_Xv3zx9r.jpg','Catan: Los Colonos Junior','Devir','INFANTIL',2,4,6),
+(5,1,'portadas/juegos/azul_edQ2yYJ.jpg','Azul','Next Move Games','ESTRATEGIA',2,4,8);
 /*!40000 ALTER TABLE `biblioteca_juegomesa` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -452,20 +452,20 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `biblioteca_libro` WRITE;
 /*!40000 ALTER TABLE `biblioteca_libro` DISABLE KEYS */;
 INSERT INTO `biblioteca_libro` VALUES
-(1,2,'portadas/libros/cien-anos-de-soledad_Xp8UIxJ.jpg','Cien años de soledad','9780307474728',1967,'FISICO',1),
-(2,2,'portadas/libros/el-amor-en-los-tiempos-del-colera_kULVbCF.jpg','El amor en los tiempos del cólera','9780307389732',1985,'FISICO',1),
-(3,1,'portadas/libros/la-casa-de-los-espiritus_vEO3wxa.jpg','La casa de los espíritus','9781501117015',1982,'FISICO',2),
-(4,1,'portadas/libros/rayuela_70Hxpyg.jpg','Rayuela','9788437604572',1963,'FISICO',3),
-(5,4,'portadas/libros/orgullo-y-prejuicio_gNhQ8Q1.jpg','Orgullo y prejuicio','9780141439518',1813,'FISICO',4),
-(6,4,'portadas/libros/1984_2ZgevTC.jpg','1984','9780451524935',1949,'FISICO',5),
-(7,2,'portadas/libros/rebelion-en-la-granja_KoOTDLC.jpg','Rebelión en la granja','9780451526342',1945,'FISICO',5),
-(8,0,'portadas/libros/los-detectives-salvajes_liQQU8O.jpg','Los detectives salvajes','9788433974787',1998,'FISICO',6),
-(9,98,'portadas/libros/cien-anos-de-soledad-ebook_kDF2avw.jpg','Cien años de soledad (ebook)','9780307474711',1967,'EBOOK',1),
-(10,99,'portadas/libros/paula_ax3bcMi.jpg','Paula','9780061564253',1994,'EBOOK',2),
-(11,98,'portadas/libros/bestiario_vhkXeJA.jpg','Bestiario','9788420633121',1951,'EBOOK',3),
-(12,99,'portadas/libros/emma_BR7oLz0.jpg','Emma','9780141439587',1815,'EBOOK',4),
-(13,99,'portadas/libros/rayuela-ebook_BfuQnVA.jpg','Rayuela (ebook)','9990000004',1963,'EBOOK',3),
-(14,99,'portadas/libros/rebelion-en-la-granja-ebook_umcfdIp.jpg','Rebelión en la granja (ebook)','9990000007',1945,'EBOOK',5);
+(1,2,'portadas/libros/cien-anos-de-soledad_5JJJusH.jpg','Cien años de soledad','9780307474728',1967,'FISICO',1),
+(2,2,'portadas/libros/el-amor-en-los-tiempos-del-colera_1VF0fpV.jpg','El amor en los tiempos del cólera','9780307389732',1985,'FISICO',1),
+(3,1,'portadas/libros/la-casa-de-los-espiritus_tfKOjEh.jpg','La casa de los espíritus','9781501117015',1982,'FISICO',2),
+(4,1,'portadas/libros/rayuela_MPZmgSc.jpg','Rayuela','9788437604572',1963,'FISICO',3),
+(5,4,'portadas/libros/orgullo-y-prejuicio_tdp6pcl.jpg','Orgullo y prejuicio','9780141439518',1813,'FISICO',4),
+(6,4,'portadas/libros/1984_8tsL8cN.jpg','1984','9780451524935',1949,'FISICO',5),
+(7,2,'portadas/libros/rebelion-en-la-granja_wBZMdPy.jpg','Rebelión en la granja','9780451526342',1945,'FISICO',5),
+(8,0,'portadas/libros/los-detectives-salvajes_sHjRORl.jpg','Los detectives salvajes','9788433974787',1998,'FISICO',6),
+(9,98,'portadas/libros/cien-anos-de-soledad-ebook_MhshErz.jpg','Cien años de soledad (ebook)','9780307474711',1967,'EBOOK',1),
+(10,99,'portadas/libros/paula_UyenXfz.jpg','Paula','9780061564253',1994,'EBOOK',2),
+(11,98,'portadas/libros/bestiario_eUTSlcx.jpg','Bestiario','9788420633121',1951,'EBOOK',3),
+(12,99,'portadas/libros/emma_2OCXbS2.jpg','Emma','9780141439587',1815,'EBOOK',4),
+(13,99,'portadas/libros/rayuela-ebook_lMbzGOf.jpg','Rayuela (ebook)','9990000004',1963,'EBOOK',3),
+(14,99,'portadas/libros/rebelion-en-la-granja-ebook_oLMChJD.jpg','Rebelión en la granja (ebook)','9990000007',1945,'EBOOK',5);
 /*!40000 ALTER TABLE `biblioteca_libro` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -765,7 +765,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -776,25 +776,26 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
 INSERT INTO `django_migrations` VALUES
-(1,'contenttypes','0001_initial','2026-09-22 07:53:26.932869'),
-(2,'auth','0001_initial','2026-09-22 07:53:27.945102'),
-(3,'admin','0001_initial','2026-09-22 07:53:28.153092'),
-(4,'admin','0002_logentry_remove_auto_add','2026-09-22 07:53:28.166801'),
-(5,'admin','0003_logentry_add_action_flag_choices','2026-09-22 07:53:28.176430'),
-(6,'contenttypes','0002_remove_content_type_name','2026-09-22 07:53:28.316444'),
-(7,'auth','0002_alter_permission_name_max_length','2026-09-22 07:53:28.405211'),
-(8,'auth','0003_alter_user_email_max_length','2026-09-22 07:53:28.464450'),
-(9,'auth','0004_alter_user_username_opts','2026-09-22 07:53:28.475139'),
-(10,'auth','0005_alter_user_last_login_null','2026-09-22 07:53:28.559328'),
-(11,'auth','0006_require_contenttypes_0002','2026-09-22 07:53:28.566455'),
-(12,'auth','0007_alter_validators_add_error_messages','2026-09-22 07:53:28.576843'),
-(13,'auth','0008_alter_user_username_max_length','2026-09-22 07:53:28.629160'),
-(14,'auth','0009_alter_user_last_name_max_length','2026-09-22 07:53:28.684201'),
-(15,'auth','0010_alter_group_name_max_length','2026-09-22 07:53:28.742155'),
-(16,'auth','0011_update_proxy_permissions','2026-09-22 07:53:28.751110'),
-(17,'auth','0012_alter_user_first_name_max_length','2026-09-22 07:53:28.805300'),
-(18,'biblioteca','0001_initial','2026-09-22 07:53:30.129276'),
-(19,'sessions','0001_initial','2026-09-22 07:53:30.226391');
+(1,'contenttypes','0001_initial','2026-09-22 09:13:06.921529'),
+(2,'auth','0001_initial','2026-09-22 09:13:07.922363'),
+(3,'admin','0001_initial','2026-09-22 09:13:08.140034'),
+(4,'admin','0002_logentry_remove_auto_add','2026-09-22 09:13:08.155555'),
+(5,'admin','0003_logentry_add_action_flag_choices','2026-09-22 09:13:08.174618'),
+(6,'contenttypes','0002_remove_content_type_name','2026-09-22 09:13:08.343796'),
+(7,'auth','0002_alter_permission_name_max_length','2026-09-22 09:13:08.429055'),
+(8,'auth','0003_alter_user_email_max_length','2026-09-22 09:13:08.495022'),
+(9,'auth','0004_alter_user_username_opts','2026-09-22 09:13:08.508931'),
+(10,'auth','0005_alter_user_last_login_null','2026-09-22 09:13:08.590055'),
+(11,'auth','0006_require_contenttypes_0002','2026-09-22 09:13:08.593041'),
+(12,'auth','0007_alter_validators_add_error_messages','2026-09-22 09:13:08.607174'),
+(13,'auth','0008_alter_user_username_max_length','2026-09-22 09:13:08.660879'),
+(14,'auth','0009_alter_user_last_name_max_length','2026-09-22 09:13:08.710930'),
+(15,'auth','0010_alter_group_name_max_length','2026-09-22 09:13:08.765941'),
+(16,'auth','0011_update_proxy_permissions','2026-09-22 09:13:08.774912'),
+(17,'auth','0012_alter_user_first_name_max_length','2026-09-22 09:13:08.820949'),
+(18,'biblioteca','0001_initial','2026-09-22 09:13:10.087935'),
+(19,'biblioteca','0002_alter_libroebook_options_alter_librofisico_options_and_more','2026-09-22 09:13:10.108859'),
+(20,'sessions','0001_initial','2026-09-22 09:13:10.199054');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -824,7 +825,7 @@ SET @OLD_AUTOCOMMIT=@@AUTOCOMMIT, @@AUTOCOMMIT=0;
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
 INSERT INTO `django_session` VALUES
-('lffo0g0qzhj2u6xjqgh02bq3oh29o4er','eyJjYXJyaXRvIjp7fX0:1x8vJp:IuaNNutZfWhGsi_CgVtu5g2s9aDkP17XwzMoY3MFH5M','2026-10-06 07:53:37.993561');
+('l4pmig3s59v4jen3tw19kydzigco1baj','eyJjYXJyaXRvIjp7fX0:1x8wZ4:ga2HuXQrf2vG9bUFyD7B8J0o_msW6zRiOIm1nU6kzgY','2026-10-06 09:13:26.004572');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 COMMIT;
@@ -839,4 +840,4 @@ SET AUTOCOMMIT=@OLD_AUTOCOMMIT;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-09-22  7:53:52
+-- Dump completed on 2026-09-22  9:14:21

@@ -1,4 +1,4 @@
-# Biblioteca Horizonte
+# Biblioteca La Recámara
 
 Aplicación web en **Django (patrón MVT)** para una biblioteca que **presta** libros (físicos y digitales) y juegos de mesa a sus socios. Usa **MariaDB** como base de datos, autenticación nativa de Django (todo el sitio exige sesión) y validación de formularios con JavaScript.
 

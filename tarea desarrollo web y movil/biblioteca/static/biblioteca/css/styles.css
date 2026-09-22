@@ -15,7 +15,8 @@
 
 body {
     margin: 0;
-    background: var(--paper);
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #4c546b 0%, var(--accent) 100%) fixed;
     color: var(--ink);
     font-family: Georgia, "Times New Roman", serif;
 }
@@ -24,27 +25,6 @@ body {
 h1, h2, h3 {
     font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
     font-weight: 600;
-}
-
-/* ---------- Franjas laterales ----------
-   Sin video ni JS: un único degradado fijo en el fondo de la página.
-   El centro (donde vive el contenido) queda con el color de página
-   normal; a los costados se pintan franjas sólidas de un gris azulado,
-   angostas, que nunca compiten con el texto. */
-@media (min-width: 900px) {
-    body {
-        background:
-            linear-gradient(
-                to right,
-                #4c546b 0%,
-                #4c546b 16%,
-                #cee82c 16%,
-                #cee82c 84%,
-                #4c546b 84%,
-                #4c546b 100%
-            )
-            fixed;
-    }
 }
 
 /* ---------- Cabecera y menú ---------- */
@@ -108,17 +88,26 @@ h1, h2, h3 {
 .site-footer {
     padding: 1.5rem 6vw;
     text-align: center;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.75);
     font: 0.8rem Arial, sans-serif;
 }
 
 /* ---------- Mensajes flash ---------- */
 .messages { list-style: none; margin: 0 0 1.5rem; padding: 0; font-family: Arial, sans-serif; }
-.message { padding: 0.8rem 1rem; margin-bottom: 0.5rem; background: #e3f3ea; color: var(--accent-dark); }
+.message { padding: 0.8rem 1rem; margin-bottom: 0.5rem; background: #e3f3ea; color: var(--accent-dark); border-radius: 10px; }
 .message-error { background: #f8dfe0; color: var(--danger); }
 
-/* ---------- Portada ---------- */
-.hero { max-width: 720px; padding: 2rem 0 3rem; }
+/* ---------- Portada ----------
+   Nada queda flotando directo sobre el gris del body: cada bloque de
+   contenido es su propia "tarjeta" blanca con esquinas redondeadas. */
+.hero {
+    max-width: 720px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    background: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(20, 24, 32, 0.18);
+}
 .hero h1, .auth-panel h1, .form-panel h1, .page-heading h1 {
     font-size: clamp(2.2rem, 6vw, 4.2rem);
     line-height: 1;
@@ -133,7 +122,15 @@ h1, h2, h3 {
     text-transform: uppercase;
 }
 
-.section-title { margin: 3rem 0 1rem; }
+.section-title {
+    display: inline-block;
+    margin: 0 0 1.5rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--surface);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(20, 24, 32, 0.12);
+}
+section + section { margin-top: 3rem; }
 
 /* ---------- Botones ---------- */
 .button {
@@ -213,26 +210,69 @@ h1, h2, h3 {
 .form-hint { color: var(--muted); font-family: Arial, sans-serif; margin: -0.5rem 0 1rem; }
 
 /* ---------- Tarjetas ---------- */
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
-.stat-card { padding: 1.5rem; background: var(--surface); border-top: 3px solid var(--accent); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1.25rem; }
+.stat-card {
+    padding: 1.5rem;
+    background: var(--surface);
+    border-top: 3px solid var(--accent);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(20, 24, 32, 0.12);
+}
 .stat-card strong, .stat-card span { display: block; }
 .stat-card strong { font-size: 2.5rem; }
 .stat-card span { color: var(--muted); font-family: Arial, sans-serif; }
 
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-.book-card { padding: 1.2rem; background: var(--surface); border: 1px solid var(--line); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+.book-card {
+    padding: 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(20, 24, 32, 0.18);
+    border-color: var(--accent);
+}
 .book-card h3 { margin: 0.3rem 0 0.8rem; font-size: 1.15rem; }
 .book-author, .book-stock { margin: 0; color: var(--muted); font: 0.8rem Arial, sans-serif; }
 .book-card form { margin-top: 0.8rem; }
 
 /* ---------- Listados ---------- */
-.page-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 2rem; }
-.page-heading h1 { font-size: 3rem; }
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(20, 24, 32, 0.12);
+}
+.page-heading h1 { font-size: 3rem; margin: 0; }
 
-.filter-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; font-family: Arial, sans-serif; }
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1.1rem 1.5rem;
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(20, 24, 32, 0.12);
+    font-family: Arial, sans-serif;
+}
 .filter-bar select { max-width: 280px; }
 
-.table-wrapper { overflow-x: auto; background: var(--surface); }
+.table-wrapper {
+    overflow-x: auto;
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(20, 24, 32, 0.12);
+}
 table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
 th, td { text-align: left; padding: 1rem; border-bottom: 1px solid var(--line); }
 th { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); }
@@ -242,13 +282,20 @@ th { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); }
 .actions form button { padding: 0.4rem 0.7rem; font-size: 0.8rem; }
 
 /* ---------- Formularios ---------- */
-.auth-panel, .form-panel { max-width: 620px; padding: 2rem; background: var(--surface); }
+.auth-panel, .form-panel {
+    max-width: 620px;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: 18px;
+    box-shadow: 0 16px 36px rgba(20, 24, 32, 0.18);
+}
 .auth-panel { margin: 0 auto; }
 
 select, input, textarea {
     width: 100%;
     padding: 0.7rem;
     border: 1px solid var(--line);
+    border-radius: 8px;
     background: var(--surface);
     font: inherit;
 }
@@ -260,7 +307,7 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--da
 .field-group ul.errorlist { margin: 0; padding: 0; color: var(--danger); list-style: none; }
 .field-error { min-height: 1.1em; color: var(--danger); font-size: 0.82rem; }
 .form-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
-.error-summary { padding: 0.8rem; background: #f8dfe0; color: var(--danger); }
+.error-summary { padding: 0.8rem; background: #f8dfe0; color: var(--danger); border-radius: 10px; }
 
 /* ---------- Estados de la vista ---------- */
 .empty-state, .error-state, .loading-state {
@@ -268,6 +315,8 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--da
     background: var(--surface);
     text-align: center;
     font-family: Arial, sans-serif;
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(20, 24, 32, 0.12);
 }
 .empty-state p { color: var(--muted); }
 .error-state { border-left: 4px solid var(--danger); color: var(--danger); }
