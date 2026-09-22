@@ -1,0 +1,53 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Mi lista de préstamos | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Antes de confirmar</p><h1>Mi lista de préstamos</h1></div></div>
+
+{% if items %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Portada</th><th>Producto</th><th>Formato</th><th></th></tr></thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>
+            {% if item.producto.imagen %}
+            <img class="cover-thumb" src="{{ item.producto.imagen.url }}" alt="">
+            {% else %}
+            <div class="cover-thumb cover-placeholder" aria-hidden="true">{% if item.tipo == 'libro' %}📕{% else %}🎲{% endif %}</div>
+            {% endif %}
+        </td>
+        <td>{{ item.producto }}</td>
+        <td>
+            {% if item.tipo == 'libro' %}
+            <span class="badge badge-{{ item.producto.tipo|lower }}">{{ item.producto.get_tipo_display }}</span>
+            {% else %}
+            <span class="badge badge-juego">Juego</span>
+            {% endif %}
+        </td>
+        <td><a href="{% url 'carrito_quitar' item.clave %}">Quitar</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% if socio %}
+<form method="post" action="{% url 'checkout' %}" class="form-panel">
+    {% csrf_token %}
+    <p>Vas a confirmar estos préstamos para <strong>{{ socio.nombre }}</strong>.</p>
+    <div class="form-actions">
+        <button class="button button-primary" type="submit">Confirmar préstamos</button>
+        <a class="button button-secondary" href="{% url 'libro_list' %}">Seguir explorando</a>
+    </div>
+</form>
+{% else %}
+<section class="error-state" role="alert">
+    <h2>Tu cuenta no está vinculada a un socio</h2>
+    <p>Pide en el mesón que vinculen tu usuario a tu ficha de socio para poder confirmar préstamos.</p>
+</section>
+{% endif %}
+{% else %}
+<section class="empty-state"><h2>Tu lista está vacía</h2><p>Agrega libros o juegos desde el catálogo para pedirlos prestados.</p></section>
+{% endif %}
+{% endblock %}

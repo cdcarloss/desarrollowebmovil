@@ -1,0 +1,56 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}{{ libro.titulo }} | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div>
+        <p class="eyebrow"><span class="badge badge-{{ libro.tipo|lower }}">{{ libro.get_tipo_display }}</span></p>
+        <h1>{{ libro.titulo }}</h1>
+    </div>
+</div>
+
+<div class="detalle-libro">
+    {% if libro.imagen %}
+    <img class="cover-detalle" src="{{ libro.imagen.url }}" alt="Portada de {{ libro.titulo }}">
+    {% else %}
+    <div class="cover-detalle cover-placeholder" aria-hidden="true">📕</div>
+    {% endif %}
+    <dl class="ficha-libro">
+        <dt>Autor</dt><dd>{{ libro.autor }}</dd>
+        <dt>Año de publicación</dt><dd>{{ libro.anio_publicacion }}</dd>
+        <dt>ISBN</dt><dd>{{ libro.isbn }}</dd>
+        <dt>Ejemplares disponibles</dt><dd>{{ libro.stock }}</dd>
+    </dl>
+</div>
+
+<section aria-labelledby="opiniones-titulo">
+    <h2 id="opiniones-titulo" class="section-title">Opiniones de los lectores</h2>
+
+    {% for comentario in comentarios %}
+    <article class="comentario">
+        <div class="comentario-cabecera">
+            {% if comentario.usuario.perfil.foto %}
+            <img class="avatar-mini" src="{{ comentario.usuario.perfil.foto.url }}" alt="">
+            {% endif %}
+            <span>{{ comentario.usuario.username }}</span>
+            <span class="comentario-fecha">{{ comentario.fecha|date:"d/m/Y H:i" }}</span>
+        </div>
+        <p class="comentario-texto">{{ comentario.texto }}</p>
+    </article>
+    {% empty %}
+    <p class="book-stock">Todavía no hay opiniones. ¡Sé el primero en comentar!</p>
+    {% endfor %}
+
+    <form method="post" class="form-panel" data-validate novalidate>
+        {% csrf_token %}
+        <div class="field-group">
+            <label for="{{ form.texto.id_for_label }}">Tu opinión</label>
+            {{ form.texto }}
+            <span class="field-error" data-error-for="{{ form.texto.id_for_label }}" role="alert"></span>
+            {{ form.texto.errors }}
+        </div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Publicar opinión</button>
+        </div>
+    </form>
+</section>
+{% endblock %}

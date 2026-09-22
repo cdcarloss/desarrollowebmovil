@@ -1,0 +1,17 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}{{ titulo }} | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">Formulario</p>
+    <h1>{{ titulo }}</h1>
+    <form method="post" enctype="multipart/form-data" data-validate novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="error-summary">{{ form.non_field_errors }}</div>{% endif %}
+        {% include 'biblioteca/_campos.html' %}
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url volver %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

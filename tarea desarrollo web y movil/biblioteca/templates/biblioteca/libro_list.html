@@ -1,0 +1,94 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Catálogo | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><p class="eyebrow">Catálogo</p><h1>Libros</h1></div>
+    {% if user.is_staff %}
+    <div class="heading-actions">
+        <a class="button button-primary" href="{% url 'libro_create' 'FISICO' %}">Agregar libro físico</a>
+        <a class="button button-secondary" href="{% url 'libro_create' 'EBOOK' %}">Agregar ebook</a>
+    </div>
+    {% endif %}
+</div>
+
+<form class="filter-bar" method="get" data-cargando>
+    <label for="autor">Autor</label>
+    <select id="autor" name="autor">
+        <option value="">Todos los autores</option>
+        {% for autor in autores %}
+        <option value="{{ autor.id }}" {% if autor.id|stringformat:'s' == autor_seleccionado %}selected{% endif %}>{{ autor.nombre }}</option>
+        {% endfor %}
+    </select>
+    <label for="tipo">Formato</label>
+    <select id="tipo" name="tipo">
+        <option value="">Todos los formatos</option>
+        {% for valor, etiqueta in tipos %}
+        <option value="{{ valor }}" {% if valor == tipo_seleccionado %}selected{% endif %}>{{ etiqueta }}</option>
+        {% endfor %}
+    </select>
+    <button class="button button-secondary" type="submit">Filtrar</button>
+</form>
+
+<div class="loading-state" id="estado-cargando" hidden role="status">Cargando catálogo…</div>
+
+<div id="resultados">
+{% if error %}
+<section class="error-state" role="alert"><h2>Algo salió mal</h2><p>{{ error }}</p><a class="button button-secondary" href="{% url 'libro_list' %}">Quitar filtros</a></section>
+{% elif libros %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Portada</th><th>Título</th><th>Formato</th><th>Autor</th><th>ISBN</th><th>{% if user.is_staff %}Disponibles{% else %}Estado{% endif %}</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for libro in libros %}
+    <tr>
+        <td>
+            {% if libro.imagen %}
+            <img class="cover-thumb" src="{{ libro.imagen.url }}" alt="Portada de {{ libro.titulo }}">
+            {% else %}
+            <div class="cover-thumb cover-placeholder" aria-hidden="true">📕</div>
+            {% endif %}
+        </td>
+        <td><a href="{% url 'libro_detalle' libro.pk %}">{{ libro.titulo }}</a></td>
+        <td><span class="badge badge-{{ libro.tipo|lower }}">{{ libro.get_tipo_display }}</span></td>
+        <td>{{ libro.autor }}</td>
+        <td>{{ libro.isbn }}</td>
+        <td>
+            {% if user.is_staff %}
+            {{ libro.stock }}
+            {% if libro.prestamos_activos %}
+            <div class="prestado-a">
+                Prestado a:
+                {% for prestamo in libro.prestamos_activos %}{{ prestamo.socio.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% elif libro.stock > 0 %}
+            <span class="badge badge-disponible">Disponible</span>
+            {% else %}
+            <span class="badge badge-no-disponible">No disponible</span>
+            {% endif %}
+        </td>
+        <td class="actions">
+            {% if libro.stock > 0 %}
+            <form method="post" action="{% url 'carrito_agregar' 'libro' libro.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="volver" value="libro_list">
+                <button class="button button-secondary" type="submit">Pedir prestado</button>
+            </form>
+            {% else %}
+            <span class="sin-stock">Sin ejemplares</span>
+            {% endif %}
+            {% if user.is_staff %}
+            <a href="{% url 'libro_update' libro.pk %}">Editar</a>
+            <a href="{% url 'libro_delete' libro.pk %}">Eliminar</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>No hay libros para mostrar</h2><p>Prueba con otro filtro o agrega el primer libro del catálogo.</p></section>
+{% endif %}
+</div>
+{% endblock %}

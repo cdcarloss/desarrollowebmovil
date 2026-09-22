@@ -1,0 +1,17 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Confirmar | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">Confirmación</p>
+    <h1>¿Quitar este {{ tipo }}?</h1>
+    <p><strong>{{ objeto }}</strong></p>
+    <p>Esta acción no se puede deshacer.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button class="button button-danger" type="submit">Confirmar</button>
+            <a class="button button-secondary" href="{% url volver %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

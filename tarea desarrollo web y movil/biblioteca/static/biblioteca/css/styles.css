@@ -1,0 +1,264 @@
+/* ---------- Variables de color ---------- */
+:root {
+    --ink: #1c2b25;
+    --muted: #667085;
+    --paper: #f6f5f0;
+    --surface: #ffffff;
+    --accent: #91ce22;
+    --accent-hover: #cee82c;
+    --accent-dark: #17603c;
+    --line: #e2e0d8;
+    --danger: #aa3d48;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Fondo animado ---------- */
+#fondo-vectores {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ---------- Cabecera y menú ---------- */
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 6vw;
+    background: var(--surface);
+    border-bottom: 3px solid var(--accent);
+}
+
+.brand {
+    color: var(--accent);
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.site-header nav {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.site-header nav a { color: var(--ink); text-decoration: none; }
+.site-header nav a:hover { color: var(--accent); }
+.user-label { color: var(--muted); }
+
+.header-actions { display: flex; align-items: center; gap: 1.2rem; font-family: Arial, sans-serif; font-size: 0.9rem; }
+.cart-link { position: relative; color: var(--ink); text-decoration: none; }
+.cart-badge {
+    display: inline-block;
+    min-width: 1.2rem;
+    padding: 0.05rem 0.3rem;
+    margin-left: 0.2rem;
+    background: var(--accent);
+    color: #fff;
+    font: 700 0.7rem Arial, sans-serif;
+    text-align: center;
+    border-radius: 999px;
+}
+
+.perfil-link { display: flex; align-items: center; gap: 0.4rem; text-decoration: none; }
+.avatar-mini { width: 26px; height: 26px; object-fit: cover; border-radius: 50%; display: block; }
+
+.logout-form { display: inline; }
+.logout-form button {
+    border: 0;
+    background: none;
+    color: var(--danger);
+    cursor: pointer;
+    font: inherit;
+}
+
+/* ---------- Contenedor y pie ---------- */
+.container { max-width: 1100px; margin: 0 auto; padding: 3rem 6vw; }
+
+.site-footer {
+    padding: 1.5rem 6vw;
+    text-align: center;
+    color: var(--muted);
+    font: 0.8rem Arial, sans-serif;
+}
+
+/* ---------- Mensajes flash ---------- */
+.messages { list-style: none; margin: 0 0 1.5rem; padding: 0; font-family: Arial, sans-serif; }
+.message { padding: 0.8rem 1rem; margin-bottom: 0.5rem; background: #e3f3ea; color: var(--accent-dark); }
+.message-error { background: #f8dfe0; color: var(--danger); }
+
+/* ---------- Portada ---------- */
+.hero { max-width: 720px; padding: 2rem 0 3rem; }
+.hero h1, .auth-panel h1, .form-panel h1, .page-heading h1 {
+    font-size: clamp(2.2rem, 6vw, 4.2rem);
+    line-height: 1;
+    margin: 0.5rem 0 1.2rem;
+}
+.hero p, .auth-panel > p { color: var(--muted); font-size: 1.1rem; line-height: 1.6; }
+
+.eyebrow {
+    color: var(--accent);
+    font: 700 0.75rem Arial, sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.section-title { margin: 3rem 0 1rem; }
+
+/* ---------- Botones ---------- */
+.button {
+    display: inline-block;
+    border: 0;
+    border-radius: 12px;
+    padding: 0.75rem 1.1rem;
+    text-decoration: none;
+    cursor: pointer;
+    font: 600 0.9rem Arial, sans-serif;
+    box-shadow: 0 4px 12px rgba(145, 206, 34, 0.5);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+.button:hover { background-color: var(--accent-hover); color: var(--ink); }
+.button-primary { background: var(--accent); color: var(--ink); }
+.button-secondary { background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+.button-danger { background: var(--danger); color: #fff; }
+
+/* ---------- Insignias de tipo/categoría ---------- */
+.badge {
+    display: inline-block;
+    margin-bottom: 0.4rem;
+    padding: 0.2rem 0.5rem;
+    color: #fff;
+    font: 700 0.7rem Arial, sans-serif;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+.badge-fisico { background: var(--accent); }
+.badge-ebook { background: #4a6fa5; }
+.badge-juego { background: #b5651d; }
+.badge-atrasado { background: var(--danger); }
+.badge-disponible { background: var(--accent); color: var(--ink); }
+.badge-no-disponible { background: var(--line); color: var(--muted); }
+.sin-stock { color: var(--muted); font: italic 0.85rem Arial, sans-serif; }
+.prestado-a { margin-top: 0.2rem; color: var(--muted); font: italic 0.78rem Arial, sans-serif; }
+
+/* ---------- Portadas ---------- */
+.cover-thumb {
+    width: 46px;
+    height: 62px;
+    object-fit: cover;
+    display: block;
+    background: var(--line);
+}
+.cover-card {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 0.8rem;
+}
+.cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+}
+.cover-thumb.cover-placeholder { font-size: 1.3rem; }
+.cover-card.cover-placeholder { font-size: 2.5rem; }
+
+/* ---------- Ficha de libro y foro de opiniones ---------- */
+.detalle-libro { display: flex; gap: 1.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.cover-detalle { width: 200px; height: 280px; object-fit: cover; flex-shrink: 0; }
+.cover-detalle.cover-placeholder { font-size: 3.5rem; background: var(--surface); border: 1px solid var(--line); }
+.ficha-libro { margin: 0; font-family: Arial, sans-serif; }
+.ficha-libro dt { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; margin-top: 0.8rem; }
+.ficha-libro dt:first-child { margin-top: 0; }
+.ficha-libro dd { margin: 0.1rem 0 0; font-size: 1.05rem; }
+
+.comentario { padding: 1rem 0; border-bottom: 1px solid var(--line); font-family: Arial, sans-serif; }
+.comentario-cabecera { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 0.85rem; }
+.comentario-fecha { margin-left: auto; color: var(--muted); font-weight: 400; font-size: 0.75rem; }
+.comentario-texto { margin: 0.4rem 0 0; line-height: 1.5; }
+
+.heading-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.form-hint { color: var(--muted); font-family: Arial, sans-serif; margin: -0.5rem 0 1rem; }
+
+/* ---------- Tarjetas ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+.stat-card { padding: 1.5rem; background: var(--surface); border-top: 3px solid var(--accent); }
+.stat-card strong, .stat-card span { display: block; }
+.stat-card strong { font-size: 2.5rem; }
+.stat-card span { color: var(--muted); font-family: Arial, sans-serif; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+.book-card { padding: 1.2rem; background: var(--surface); border: 1px solid var(--line); }
+.book-card h3 { margin: 0.3rem 0 0.8rem; font-size: 1.15rem; }
+.book-author, .book-stock { margin: 0; color: var(--muted); font: 0.8rem Arial, sans-serif; }
+.book-card form { margin-top: 0.8rem; }
+
+/* ---------- Listados ---------- */
+.page-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 2rem; }
+.page-heading h1 { font-size: 3rem; }
+
+.filter-bar { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; font-family: Arial, sans-serif; }
+.filter-bar select { max-width: 280px; }
+
+.table-wrapper { overflow-x: auto; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; }
+th, td { text-align: left; padding: 1rem; border-bottom: 1px solid var(--line); }
+th { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); }
+.actions { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.actions a { color: var(--accent); }
+.actions form { margin: 0; }
+.actions form button { padding: 0.4rem 0.7rem; font-size: 0.8rem; }
+
+/* ---------- Formularios ---------- */
+.auth-panel, .form-panel { max-width: 620px; padding: 2rem; background: var(--surface); }
+
+select, input, textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font: inherit;
+}
+textarea { resize: vertical; }
+input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); }
+
+.field-group { display: flex; flex-direction: column; gap: 0.35rem; margin: 1rem 0; font-family: Arial, sans-serif; }
+.field-group label { font-weight: bold; font-size: 0.9rem; }
+.field-group ul.errorlist { margin: 0; padding: 0; color: var(--danger); list-style: none; }
+.field-error { min-height: 1.1em; color: var(--danger); font-size: 0.82rem; }
+.form-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+.error-summary { padding: 0.8rem; background: #f8dfe0; color: var(--danger); }
+
+/* ---------- Estados de la vista ---------- */
+.empty-state, .error-state, .loading-state {
+    padding: 2.5rem;
+    background: var(--surface);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+.empty-state p { color: var(--muted); }
+.error-state { border-left: 4px solid var(--danger); color: var(--danger); }
+.loading-state { color: var(--muted); }
+.loading-state[hidden] { display: none; }
+
+/* ---------- Móvil ---------- */
+@media (max-width: 700px) {
+    .site-header { align-items: flex-start; gap: 1rem; flex-direction: column; }
+    .site-header nav, .header-actions { flex-wrap: wrap; }
+    .container { padding-top: 2rem; }
+    .page-heading, .filter-bar { align-items: stretch; flex-direction: column; }
+    .stats { grid-template-columns: 1fr; }
+}

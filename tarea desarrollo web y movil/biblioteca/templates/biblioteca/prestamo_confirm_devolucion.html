@@ -1,0 +1,17 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Marcar devuelto | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">Confirmación</p>
+    <h1>¿Marcar este préstamo como devuelto?</h1>
+    <p><strong>{{ prestamo.producto }}</strong> — prestado a {{ prestamo.socio }}</p>
+    <p>Se repondrá el ejemplar en el catálogo.</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Confirmar devolución</button>
+            <a class="button button-secondary" href="{% url volver %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

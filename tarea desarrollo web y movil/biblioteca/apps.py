@@ -4,3 +4,6 @@ from django.apps import AppConfig
 class BibliotecaConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "biblioteca"
+
+    def ready(self):
+        from . import signals  # noqa: F401  (conecta la señal post_save de User)

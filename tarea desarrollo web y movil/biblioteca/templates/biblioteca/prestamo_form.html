@@ -1,0 +1,19 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}{{ titulo }} | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="form-panel">
+    <p class="eyebrow">Mesón</p>
+    <h1>{{ titulo }}</h1>
+    <p class="form-hint">Elige un libro <strong>o</strong> un juego de mesa: un préstamo no puede ser de ambos.</p>
+    <form method="post" data-validate data-exclusivo="id_libro,id_juego" data-error-exclusivo="error-exclusivo" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="error-summary">{{ form.non_field_errors }}</div>{% endif %}
+        {% include 'biblioteca/_campos.html' %}
+        <div class="field-error" id="error-exclusivo" role="alert"></div>
+        <div class="form-actions">
+            <button class="button button-primary" type="submit">Guardar</button>
+            <a class="button button-secondary" href="{% url volver %}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

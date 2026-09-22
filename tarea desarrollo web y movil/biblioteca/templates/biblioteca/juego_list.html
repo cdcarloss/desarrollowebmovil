@@ -1,0 +1,67 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Juegos de mesa | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><p class="eyebrow">Catálogo</p><h1>Juegos de mesa</h1></div>
+    {% if user.is_staff %}
+    <a class="button button-primary" href="{% url 'juego_create' %}">Agregar juego</a>
+    {% endif %}
+</div>
+{% if juegos %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Portada</th><th>Nombre</th><th>Categoría</th><th>Marca</th><th>Jugadores</th><th>Edad mínima</th><th>{% if user.is_staff %}Disponibles{% else %}Estado{% endif %}</th><th>Acciones</th></tr></thead>
+    <tbody>
+    {% for juego in juegos %}
+    <tr>
+        <td>
+            {% if juego.imagen %}
+            <img class="cover-thumb" src="{{ juego.imagen.url }}" alt="Portada de {{ juego.nombre }}">
+            {% else %}
+            <div class="cover-thumb cover-placeholder" aria-hidden="true">🎲</div>
+            {% endif %}
+        </td>
+        <td>{{ juego.nombre }}</td>
+        <td>{{ juego.get_categoria_display }}</td>
+        <td>{{ juego.marca }}</td>
+        <td>{{ juego.jugadores_min }}–{{ juego.jugadores_max }}</td>
+        <td>{{ juego.edad_minima }}+</td>
+        <td>
+            {% if user.is_staff %}
+            {{ juego.stock }}
+            {% if juego.prestamos_activos %}
+            <div class="prestado-a">
+                Prestado a:
+                {% for prestamo in juego.prestamos_activos %}{{ prestamo.socio.nombre }}{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+            {% endif %}
+            {% elif juego.stock > 0 %}
+            <span class="badge badge-disponible">Disponible</span>
+            {% else %}
+            <span class="badge badge-no-disponible">No disponible</span>
+            {% endif %}
+        </td>
+        <td class="actions">
+            {% if juego.stock > 0 %}
+            <form method="post" action="{% url 'carrito_agregar' 'juego' juego.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="volver" value="juego_list">
+                <button class="button button-secondary" type="submit">Pedir prestado</button>
+            </form>
+            {% else %}
+            <span class="sin-stock">Sin ejemplares</span>
+            {% endif %}
+            {% if user.is_staff %}
+            <a href="{% url 'juego_update' juego.pk %}">Editar</a>
+            <a href="{% url 'juego_delete' juego.pk %}">Eliminar</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>No hay juegos para mostrar</h2><p>Agrega el primer juego de mesa del catálogo.</p></section>
+{% endif %}
+{% endblock %}

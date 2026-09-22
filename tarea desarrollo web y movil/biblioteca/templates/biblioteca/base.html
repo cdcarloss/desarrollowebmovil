@@ -1,0 +1,56 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Biblioteca Horizonte{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'biblioteca/css/styles.css' %}">
+</head>
+<body>
+    <canvas id="fondo-vectores" aria-hidden="true"></canvas>
+    <header class="site-header">
+        <a class="brand" href="{% url 'home' %}">Biblioteca Horizonte</a>
+        {% if user.is_authenticated %}
+        <nav aria-label="Navegación principal">
+            <a href="{% url 'home' %}">Inicio</a>
+            <a href="{% url 'libro_list' %}">Libros</a>
+            <a href="{% url 'juego_list' %}">Juegos</a>
+            <a href="{% url 'mis_prestamos' %}">Mis préstamos</a>
+            {% if user.is_staff %}
+            <a href="{% url 'prestamo_list' %}">Préstamos</a>
+            <a href="{% url 'socio_list' %}">Socios</a>
+            {% endif %}
+        </nav>
+        <div class="header-actions">
+            <a class="cart-link" href="{% url 'carrito_ver' %}" aria-label="Mi lista de préstamos">
+                📚 Mi lista <span class="cart-badge">{{ carrito_cantidad }}</span>
+            </a>
+            <a class="perfil-link" href="{% url 'perfil_editar' %}">
+                {% if perfil_actual.foto %}
+                <img class="avatar-mini" src="{{ perfil_actual.foto.url }}" alt="">
+                {% endif %}
+                <span class="user-label">Hola, {{ user.username }}</span>
+            </a>
+            <form method="post" action="{% url 'logout' %}" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        </div>
+        {% endif %}
+    </header>
+    <main class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="message message-{{ message.tags }}" role="status">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">Biblioteca Horizonte · Proyecto académico de Desarrollo Web y Móvil</footer>
+    <script src="{% static 'biblioteca/js/validation.js' %}"></script>
+    <script src="{% static 'biblioteca/js/fondo.js' %}"></script>
+</body>
+</html>

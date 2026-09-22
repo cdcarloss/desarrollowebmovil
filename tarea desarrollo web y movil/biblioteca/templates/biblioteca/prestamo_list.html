@@ -1,0 +1,64 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Préstamos | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><p class="eyebrow">Préstamos</p><h1>Historial de préstamos</h1></div>
+    <a class="button button-primary" href="{% url 'prestamo_create' %}">Registrar préstamo en mesón</a>
+</div>
+
+<form class="filter-bar" method="get" data-cargando>
+    <label for="empleado">Filtrar por empleado</label>
+    <select id="empleado" name="empleado">
+        <option value="">Todos (incluye pedidos desde el portal)</option>
+        {% for empleado in empleados %}
+        <option value="{{ empleado.id }}" {% if empleado.id|stringformat:'s' == empleado_seleccionado %}selected{% endif %}>{{ empleado.nombre }}</option>
+        {% endfor %}
+    </select>
+    <button class="button button-secondary" type="submit">Filtrar</button>
+</form>
+
+<div class="loading-state" id="estado-cargando" hidden role="status">Cargando préstamos…</div>
+
+<div id="resultados">
+{% if prestamos %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>#</th><th>Producto</th><th>Socio</th><th>Atendido por</th><th>Prestado</th><th>Debe volver</th><th>Estado</th><th></th></tr></thead>
+    <tbody>
+    {% for prestamo in prestamos %}
+    <tr>
+        <td>{{ prestamo.pk }}</td>
+        <td>
+            <span class="badge {% if prestamo.libro %}badge-{{ prestamo.libro.tipo|lower }}{% else %}badge-juego{% endif %}">
+                {% if prestamo.libro %}{{ prestamo.libro.get_tipo_display }}{% else %}Juego{% endif %}
+            </span>
+            {{ prestamo.producto }}
+        </td>
+        <td>{{ prestamo.socio }}</td>
+        <td>{{ prestamo.empleado|default:"Portal (sin empleado)" }}</td>
+        <td>{{ prestamo.fecha_prestamo|date:"d/m/Y" }}</td>
+        <td>{{ prestamo.fecha_devolucion_prevista|date:"d/m/Y" }}</td>
+        <td>
+            {% if prestamo.devuelto %}
+            Devuelto el {{ prestamo.fecha_devolucion_real|date:"d/m/Y" }}
+            {% elif prestamo.esta_atrasado %}
+            <span class="badge badge-atrasado">Atrasado {{ prestamo.dias_de_atraso }} día{{ prestamo.dias_de_atraso|pluralize }}</span>
+            {% else %}
+            En préstamo
+            {% endif %}
+        </td>
+        <td class="actions">
+            {% if not prestamo.devuelto %}
+            <a href="{% url 'prestamo_devolver' prestamo.pk %}">Marcar devuelto</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>No hay préstamos para mostrar</h2><p>Registra el primer préstamo o cambia el filtro.</p></section>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Socios | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading">
+    <div><p class="eyebrow">Membresías</p><h1>Socios</h1></div>
+    <a class="button button-primary" href="{% url 'socio_create' %}">Registrar socio</a>
+</div>
+{% if socios %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Desde</th></tr></thead>
+    <tbody>
+    {% for socio in socios %}
+    <tr><td>{{ socio.nombre }}</td><td>{{ socio.correo }}</td><td>{{ socio.telefono }}</td><td>{{ socio.fecha_registro|date:"d/m/Y" }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>Aún no hay socios</h2><p>Registra al primero como miembro de la biblioteca.</p></section>
+{% endif %}
+{% endblock %}

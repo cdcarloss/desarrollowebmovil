@@ -1,0 +1,73 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Inicio | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Panel de la biblioteca</p>
+    <h1>Cada libro y cada juego encuentran a su lector.</h1>
+    <p>Consulta el catálogo, arma tu lista de préstamos y administra socios y empleados.</p>
+    <a class="button button-primary" href="{% url 'libro_list' %}">Ver libros</a>
+    <a class="button button-secondary" href="{% url 'juego_list' %}">Ver juegos</a>
+    {% if user.is_staff %}
+    <a class="button button-secondary" href="{% url 'prestamo_create' %}">Registrar préstamo en mesón</a>
+    {% endif %}
+</section>
+
+<section class="stats" aria-label="Resumen">
+    <article class="stat-card"><strong>{{ total_libros }}</strong><span>libros en catálogo</span></article>
+    <article class="stat-card"><strong>{{ total_juegos }}</strong><span>juegos de mesa</span></article>
+    <article class="stat-card"><strong>{{ total_socios }}</strong><span>socios registrados</span></article>
+    <article class="stat-card"><strong>{{ total_prestamos }}</strong><span>préstamos sin devolver</span></article>
+</section>
+
+<section aria-labelledby="libros-titulo">
+    <h2 id="libros-titulo" class="section-title">Libros disponibles</h2>
+    <div class="card-grid">
+        {% for libro in libros_destacados %}
+        <article class="book-card">
+            {% if libro.imagen %}
+            <img class="cover-card" src="{{ libro.imagen.url }}" alt="Portada de {{ libro.titulo }}">
+            {% else %}
+            <div class="cover-card cover-placeholder" aria-hidden="true">📕</div>
+            {% endif %}
+            <span class="badge badge-{{ libro.tipo|lower }}">{{ libro.get_tipo_display }}</span>
+            <p class="book-author">{{ libro.autor }}</p>
+            <h3><a href="{% url 'libro_detalle' libro.pk %}">{{ libro.titulo }}</a></h3>
+            <p class="book-stock">{{ libro.stock }} disponibles</p>
+            <form method="post" action="{% url 'carrito_agregar' 'libro' libro.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="volver" value="home">
+                <button class="button button-secondary" type="submit">Pedir prestado</button>
+            </form>
+        </article>
+        {% empty %}
+        <p>No hay libros con ejemplares disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section aria-labelledby="juegos-titulo">
+    <h2 id="juegos-titulo" class="section-title">Juegos de mesa</h2>
+    <div class="card-grid">
+        {% for juego in juegos_destacados %}
+        <article class="book-card">
+            {% if juego.imagen %}
+            <img class="cover-card" src="{{ juego.imagen.url }}" alt="Portada de {{ juego.nombre }}">
+            {% else %}
+            <div class="cover-card cover-placeholder" aria-hidden="true">🎲</div>
+            {% endif %}
+            <span class="badge badge-juego">{{ juego.get_categoria_display }}</span>
+            <p class="book-author">{{ juego.marca }}</p>
+            <h3>{{ juego.nombre }}</h3>
+            <p class="book-stock">{{ juego.stock }} disponibles</p>
+            <form method="post" action="{% url 'carrito_agregar' 'juego' juego.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="volver" value="home">
+                <button class="button button-secondary" type="submit">Pedir prestado</button>
+            </form>
+        </article>
+        {% empty %}
+        <p>No hay juegos con ejemplares disponibles.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

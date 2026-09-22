@@ -1,0 +1,41 @@
+{% extends 'biblioteca/base.html' %}
+{% block title %}Mis préstamos | Biblioteca Horizonte{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">Mi cuenta</p><h1>Mis préstamos</h1></div></div>
+
+{% if not socio %}
+<section class="empty-state">
+    <h2>Tu cuenta no está vinculada a un socio</h2>
+    <p>Pide en el mesón que vinculen tu usuario a tu ficha de socio para ver aquí tus préstamos y fechas de devolución.</p>
+</section>
+{% elif prestamos %}
+<div class="table-wrapper">
+<table>
+    <thead><tr><th>Producto</th><th>Prestado el</th><th>Debe volver el</th><th>Estado</th></tr></thead>
+    <tbody>
+    {% for prestamo in prestamos %}
+    <tr>
+        <td>
+            <span class="badge {% if prestamo.libro %}badge-{{ prestamo.libro.tipo|lower }}{% else %}badge-juego{% endif %}">
+                {% if prestamo.libro %}{{ prestamo.libro.get_tipo_display }}{% else %}Juego{% endif %}
+            </span>
+            {{ prestamo.producto }}
+        </td>
+        <td>{{ prestamo.fecha_prestamo|date:"d/m/Y" }}</td>
+        <td>{{ prestamo.fecha_devolucion_prevista|date:"d/m/Y" }}</td>
+        <td>
+            {% if prestamo.esta_atrasado %}
+            <span class="badge badge-atrasado">Atrasado {{ prestamo.dias_de_atraso }} día{{ prestamo.dias_de_atraso|pluralize }}</span>
+            {% else %}
+            En préstamo
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% else %}
+<section class="empty-state"><h2>No tienes préstamos activos</h2><p>Explora el catálogo y pide uno desde "Mi lista".</p></section>
+{% endif %}
+{% endblock %}
