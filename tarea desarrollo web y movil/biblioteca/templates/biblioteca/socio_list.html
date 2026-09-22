@@ -8,10 +8,16 @@
 {% if socios %}
 <div class="table-wrapper">
 <table>
-    <thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Desde</th></tr></thead>
+    <thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Desde</th><th></th></tr></thead>
     <tbody>
     {% for socio in socios %}
-    <tr><td>{{ socio.nombre }}</td><td>{{ socio.correo }}</td><td>{{ socio.telefono }}</td><td>{{ socio.fecha_registro|date:"d/m/Y" }}</td></tr>
+    <tr>
+        <td>{{ socio.nombre }}</td><td>{{ socio.correo }}</td><td>{{ socio.telefono }}</td><td>{{ socio.fecha_registro|date:"d/m/Y" }}</td>
+        <td class="actions">
+            <a href="{% url 'socio_update' socio.pk %}">Editar</a>
+            <a href="{% url 'socio_delete' socio.pk %}">Eliminar</a>
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>

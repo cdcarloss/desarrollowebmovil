@@ -20,9 +20,13 @@ urlpatterns = [
 
     path("socios/", views.socio_list, name="socio_list"),
     path("socios/nuevo/", views.socio_create, name="socio_create"),
+    path("socios/<int:pk>/editar/", views.socio_update, name="socio_update"),
+    path("socios/<int:pk>/eliminar/", views.socio_delete, name="socio_delete"),
 
     path("prestamos/", views.prestamo_list, name="prestamo_list"),
     path("prestamos/nuevo/", views.prestamo_create, name="prestamo_create"),
+    path("prestamos/<int:pk>/editar/", views.prestamo_update, name="prestamo_update"),
+    path("prestamos/<int:pk>/eliminar/", views.prestamo_delete, name="prestamo_delete"),
     path("prestamos/<int:pk>/devolver/", views.prestamo_devolver, name="prestamo_devolver"),
 
     path("mi-lista/", views.carrito_ver, name="carrito_ver"),

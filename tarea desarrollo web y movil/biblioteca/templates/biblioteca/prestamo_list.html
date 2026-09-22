@@ -51,6 +51,8 @@
             {% if not prestamo.devuelto %}
             <a href="{% url 'prestamo_devolver' prestamo.pk %}">Marcar devuelto</a>
             {% endif %}
+            <a href="{% url 'prestamo_update' prestamo.pk %}">Editar</a>
+            <a href="{% url 'prestamo_delete' prestamo.pk %}">Eliminar</a>
         </td>
     </tr>
     {% endfor %}

@@ -113,6 +113,7 @@ class LibroFisico(Libro):
     )
 
     class Meta:
+        ordering = ["titulo"]
         verbose_name = "libro físico"
         verbose_name_plural = "libros físicos"
 
@@ -133,6 +134,7 @@ class LibroEbook(Libro):
     tamano_mb = models.PositiveIntegerField("tamaño (MB)", validators=[MinValueValidator(1)])
 
     class Meta:
+        ordering = ["titulo"]
         verbose_name = "ebook"
         verbose_name_plural = "ebooks"
 
@@ -211,6 +213,7 @@ class Perfil(models.Model):
     descripcion = models.CharField("descripción", max_length=280, blank=True)
 
     class Meta:
+        ordering = ["usuario__username"]
         verbose_name = "perfil"
         verbose_name_plural = "perfiles"
 
@@ -359,3 +362,14 @@ class Prestamo(models.Model):
             self.devuelto = True
             self.fecha_devolucion_real = timezone.now().date()
             self.save(update_fields=["devuelto", "fecha_devolucion_real"])
+
+    def eliminar_y_reponer(self):
+        """Elimina el registro del préstamo. Si aún no había sido devuelto,
+        repone el stock primero: de lo contrario el ejemplar quedaría
+        descontado para siempre sin ningún préstamo que lo explique."""
+        with transaction.atomic():
+            if not self.devuelto:
+                Modelo = Libro if self.libro_id else JuegoMesa
+                producto = Modelo.objects.select_for_update().get(pk=self.libro_id or self.juego_id)
+                producto.reponer_stock()
+            self.delete()

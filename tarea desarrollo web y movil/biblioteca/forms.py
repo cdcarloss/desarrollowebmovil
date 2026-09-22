@@ -91,6 +91,24 @@ class PrestamoForm(forms.ModelForm):
         self.fields["empleado"].required = True
 
 
+class PrestamoEditForm(forms.ModelForm):
+    """Edición de un préstamo ya existente: a propósito solo permite
+    corregir el socio y el empleado. El producto (libro/juego) no se
+    puede cambiar aquí porque el stock ya se descontó del producto
+    original al crear el préstamo (ver Prestamo.save()); cambiarlo
+    dejaría el conteo de ejemplares descuadrado."""
+
+    class Meta:
+        model = Prestamo
+        fields = ["socio", "empleado"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["socio"].empty_label = "Selecciona un socio"
+        self.fields["empleado"].queryset = Empleado.objects.filter(activo=True)
+        self.fields["empleado"].empty_label = "Selecciona un empleado"
+
+
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil

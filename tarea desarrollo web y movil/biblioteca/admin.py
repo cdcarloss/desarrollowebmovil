@@ -52,6 +52,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
     list_filter = ("cargo", "activo")
     list_editable = ("activo",)
     search_fields = ("nombre", "correo")
+    ordering = ("nombre",)
 
 
 @admin.register(Prestamo)
@@ -67,6 +68,7 @@ class PrestamoAdmin(admin.ModelAdmin):
 class PerfilAdmin(admin.ModelAdmin):
     list_display = ("usuario", "descripcion")
     search_fields = ("usuario__username",)
+    ordering = ("usuario__username",)
 
 
 @admin.register(Comentario)

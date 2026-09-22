@@ -16,6 +16,7 @@ from .forms import (
     LibroFisicoForm,
     LoginForm,
     PerfilForm,
+    PrestamoEditForm,
     PrestamoForm,
     SocioForm,
 )
@@ -227,6 +228,39 @@ def socio_create(request):
 
 
 @solo_administradores
+def socio_update(request, pk):
+    socio = get_object_or_404(Socio, pk=pk)
+    form = SocioForm(request.POST or None, instance=socio)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Socio actualizado correctamente.")
+        return redirect("socio_list")
+    return render(request, "biblioteca/form.html", {"form": form, "titulo": "Editar socio", "volver": "socio_list"})
+
+
+@solo_administradores
+def socio_delete(request, pk):
+    socio = get_object_or_404(Socio, pk=pk)
+    # Prestamo.socio es CASCADE (ver justificación en el README), pero ese
+    # borrado en cascada no pasa por Prestamo.eliminar_y_reponer(): si el
+    # socio tuviera un préstamo sin devolver, el ejemplar quedaría
+    # descontado del stock para siempre. Se bloquea ese caso en vez de
+    # dejar el inventario descuadrado.
+    if request.method == "POST":
+        if socio.prestamos.filter(devuelto=False).exists():
+            messages.error(request, "No se puede eliminar: el socio tiene préstamos sin devolver.")
+        else:
+            socio.delete()
+            messages.success(request, "Socio eliminado.")
+        return redirect("socio_list")
+    return render(
+        request,
+        "biblioteca/confirm_delete.html",
+        {"objeto": socio, "tipo": "socio", "volver": "socio_list"},
+    )
+
+
+@solo_administradores
 def prestamo_list(request):
     empleado_id = request.GET.get("empleado", "")
     prestamos = Prestamo.objects.select_related("libro", "juego", "socio", "empleado")
@@ -252,6 +286,31 @@ def prestamo_create(request):
             messages.success(request, "Préstamo registrado correctamente.")
             return redirect("prestamo_list")
     return render(request, "biblioteca/prestamo_form.html", {"form": form, "titulo": "Registrar préstamo", "volver": "prestamo_list"})
+
+
+@solo_administradores
+def prestamo_update(request, pk):
+    prestamo = get_object_or_404(Prestamo, pk=pk)
+    form = PrestamoEditForm(request.POST or None, instance=prestamo)
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Préstamo actualizado correctamente.")
+        return redirect("prestamo_list")
+    return render(request, "biblioteca/form.html", {"form": form, "titulo": "Editar préstamo", "volver": "prestamo_list"})
+
+
+@solo_administradores
+def prestamo_delete(request, pk):
+    prestamo = get_object_or_404(Prestamo, pk=pk)
+    if request.method == "POST":
+        prestamo.eliminar_y_reponer()
+        messages.success(request, "Préstamo eliminado.")
+        return redirect("prestamo_list")
+    return render(
+        request,
+        "biblioteca/confirm_delete.html",
+        {"objeto": prestamo, "tipo": "préstamo", "volver": "prestamo_list"},
+    )
 
 
 @solo_administradores

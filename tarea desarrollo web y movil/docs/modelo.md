@@ -29,11 +29,11 @@ erDiagram
         bigint autor_id FK
     }
     LIBROFISICO {
-        bigint libro_ptr_id PK_FK "= LIBRO.id"
+        bigint libro_ptr_id PK "FK, igual a LIBRO.id"
         varchar ubicacion
     }
     LIBROEBOOK {
-        bigint libro_ptr_id PK_FK "= LIBRO.id"
+        bigint libro_ptr_id PK "FK, igual a LIBRO.id"
         varchar formato_archivo
         int tamano_mb
     }
@@ -62,7 +62,7 @@ erDiagram
     }
     PERFIL {
         bigint id PK
-        bigint usuario_id FK UK
+        bigint usuario_id FK,UK
         varchar foto
         varchar descripcion
     }

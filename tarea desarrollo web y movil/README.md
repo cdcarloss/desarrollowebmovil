@@ -17,7 +17,11 @@ Aplicación web en **Django (patrón MVT)** para una biblioteca que **presta** l
 | `Perfil` | Foto y descripción de cada cuenta de usuario (`auth.User`). Se crea sola al crear la cuenta. |
 | `Comentario` | Una opinión de un usuario sobre un libro: el foro del catálogo. |
 
-Relaciones: `Autor 1—N Libro`, `Libro 1—N Prestamo` (opcional), `JuegoMesa 1—N Prestamo` (opcional), `Socio 1—N Prestamo`, `Empleado 1—N Prestamo` (opcional), `Socio 1—1 User` (opcional), `User 1—1 Perfil`, `Libro 1—N Comentario`, `User 1—N Comentario`. `LibroFisico` y `LibroEbook` heredan de `Libro`. Diagrama completo en [docs/modelo.md](docs/modelo.md).
+Relaciones: `Autor 1—N Libro`, `Libro 1—N Prestamo` (opcional), `JuegoMesa 1—N Prestamo` (opcional), `Socio 1—N Prestamo`, `Empleado 1—N Prestamo` (opcional), `Socio 1—1 User` (opcional), `User 1—1 Perfil`, `Libro 1—N Comentario`, `User 1—N Comentario`. `LibroFisico` y `LibroEbook` heredan de `Libro`.
+
+![Diagrama del modelo de datos](docs/diagrama_modelo.png)
+
+Diagrama fuente (editable) y detalle de cardinalidades en [docs/modelo.md](docs/modelo.md).
 
 ### Por qué `Libro` es un súper tipo con subtipos
 
